@@ -9,8 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TemplatesRouteImport } from './routes/templates'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ResearchRouteImport } from './routes/research'
+import { Route as MeetingsRouteImport } from './routes/meetings'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as EmailRouteImport } from './routes/email'
+import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TemplatesRoute = TemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResearchRoute = ResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetingsRoute = MeetingsRouteImport.update({
+  id: '/meetings',
+  path: '/meetings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailRoute = EmailRouteImport.update({
+  id: '/email',
+  path: '/email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +61,130 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/documents': typeof DocumentsRoute
+  '/email': typeof EmailRoute
+  '/help': typeof HelpRoute
+  '/meetings': typeof MeetingsRoute
+  '/research': typeof ResearchRoute
+  '/settings': typeof SettingsRoute
+  '/templates': typeof TemplatesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/documents': typeof DocumentsRoute
+  '/email': typeof EmailRoute
+  '/help': typeof HelpRoute
+  '/meetings': typeof MeetingsRoute
+  '/research': typeof ResearchRoute
+  '/settings': typeof SettingsRoute
+  '/templates': typeof TemplatesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/documents': typeof DocumentsRoute
+  '/email': typeof EmailRoute
+  '/help': typeof HelpRoute
+  '/meetings': typeof MeetingsRoute
+  '/research': typeof ResearchRoute
+  '/settings': typeof SettingsRoute
+  '/templates': typeof TemplatesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/documents'
+    | '/email'
+    | '/help'
+    | '/meetings'
+    | '/research'
+    | '/settings'
+    | '/templates'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/documents'
+    | '/email'
+    | '/help'
+    | '/meetings'
+    | '/research'
+    | '/settings'
+    | '/templates'
+  id:
+    | '__root__'
+    | '/'
+    | '/documents'
+    | '/email'
+    | '/help'
+    | '/meetings'
+    | '/research'
+    | '/settings'
+    | '/templates'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DocumentsRoute: typeof DocumentsRoute
+  EmailRoute: typeof EmailRoute
+  HelpRoute: typeof HelpRoute
+  MeetingsRoute: typeof MeetingsRoute
+  ResearchRoute: typeof ResearchRoute
+  SettingsRoute: typeof SettingsRoute
+  TemplatesRoute: typeof TemplatesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/templates': {
+      id: '/templates'
+      path: '/templates'
+      fullPath: '/templates'
+      preLoaderRoute: typeof TemplatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/research': {
+      id: '/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meetings': {
+      id: '/meetings'
+      path: '/meetings'
+      fullPath: '/meetings'
+      preLoaderRoute: typeof MeetingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/email': {
+      id: '/email'
+      path: '/email'
+      fullPath: '/email'
+      preLoaderRoute: typeof EmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +197,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DocumentsRoute: DocumentsRoute,
+  EmailRoute: EmailRoute,
+  HelpRoute: HelpRoute,
+  MeetingsRoute: MeetingsRoute,
+  ResearchRoute: ResearchRoute,
+  SettingsRoute: SettingsRoute,
+  TemplatesRoute: TemplatesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
