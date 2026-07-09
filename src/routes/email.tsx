@@ -31,6 +31,18 @@ function EmailPage() {
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const raw = sessionStorage.getItem("lizbee.emailTemplate");
+    if (!raw) return;
+    try {
+      const t = JSON.parse(raw) as { purpose: string; tone: Tone; title: string };
+      setPurpose(t.purpose);
+      setTone(t.tone);
+      setRecipient("");
+    } catch { /* ignore */ }
+    sessionStorage.removeItem("lizbee.emailTemplate");
+  }, []);
+
   async function run(mode: "generate" | "shorten" | "expand" | "rewrite" = "generate") {
     if (!purpose.trim()) {
       toast.error("Tell LizBee what the email is about first 🐝");
